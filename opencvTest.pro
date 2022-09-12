@@ -25,7 +25,7 @@ HEADERS += \
 FORMS += \
     mainwindow.ui
 
-# Opencv库文件路径添加
+# Opencv库文件路径添加 若程序异常结束则需添加环境变量OpenCV-4.5.0-with-contrib-MinGW730-nonfree\x64\mingw\bin到path
 INCLUDEPATH += $$PWD\OpenCV-4.5.0-with-contrib-MinGW730-nonfree\include
 LIBS += $$PWD\OpenCV-4.5.0-with-contrib-MinGW730-nonfree\x64\mingw\lib\libopencv_*.a
 
