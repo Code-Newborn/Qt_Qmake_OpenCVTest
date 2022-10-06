@@ -4,6 +4,7 @@
 #include <opencv2/opencv.hpp>
 
 using namespace cv;
+using namespace std;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -11,9 +12,16 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    cv::Mat image = imread("../lena.jpg",1);
+    cv::Mat src = imread("../lena.jpg",1);
+    int numfeature =400;
+    Ptr<SIFT>detector= SIFT::create(numfeature);
+    vector<KeyPoint>keypoints;
+    detector->detect(src,keypoints,Mat());
+    printf("所有特征点数：%lld \n",keypoints.size());
+    Mat resultImg;
+    drawKeypoints(src,keypoints,resultImg,Scalar::all(-1),DrawMatchesFlags::DEFAULT);
     namedWindow( "Display window", WINDOW_AUTOSIZE );
-    imshow( "Display window", image );
+    imshow("Display window",resultImg);
 }
 
 MainWindow::~MainWindow()
