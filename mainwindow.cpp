@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include <opencv2/opencv.hpp>
+#include <QDebug>
 
 using namespace cv;
 using namespace std;
@@ -17,7 +18,9 @@ MainWindow::MainWindow(QWidget *parent)
     Ptr<SIFT>detector= SIFT::create(numfeature);
     vector<KeyPoint>keypoints;
     detector->detect(src,keypoints,Mat());
-    printf("所有特征点数：%lld \n",keypoints.size());
+
+    qDebug() << "所有特征点数：" << keypoints.size(); // 使用printf乱码
+
     Mat resultImg;
     drawKeypoints(src,keypoints,resultImg,Scalar::all(-1),DrawMatchesFlags::DEFAULT);
     namedWindow( "Display window", WINDOW_AUTOSIZE );
